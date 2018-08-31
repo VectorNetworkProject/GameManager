@@ -9,6 +9,6 @@
 namespace VectorNetworkProject\GameManager\Event;
 
 
-class PlayerQuitGameEvent extends PlayerGameEvent
+class PlayerQuitGameEvent extends PlayerGameManagerEvent
 {
 }

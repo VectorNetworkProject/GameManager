@@ -12,7 +12,7 @@ use pocketmine\event\plugin\PluginEvent;
 use pocketmine\plugin\Plugin;
 use VectorNetworkProject\GameManager\IGame;
 
-class GameEvent extends PluginEvent
+class GameManagerEvent extends PluginEvent
 {
 	/** @var IGame */
 	private $game;

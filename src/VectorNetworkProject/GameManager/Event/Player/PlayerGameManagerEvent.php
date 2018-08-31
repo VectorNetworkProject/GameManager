@@ -11,10 +11,10 @@ namespace VectorNetworkProject\GameManager\Event;
 
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
-use VectorNetworkProject\GamaManager\Event\GameEvent;
+use VectorNetworkProject\GamaManager\Event\GameManagerEvent;
 use VectorNetworkProject\GameManager\IGame;
 
-class PlayerGameEvent extends GameEvent
+class PlayerGameManagerEvent extends GameManagerEvent
 {
 	/** @var Player */
 	private $player;

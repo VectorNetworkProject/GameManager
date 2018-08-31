@@ -11,6 +11,6 @@ namespace VectorNetworkProject\GameManager\Event;
 use pocketmine\event\Cancellable;
 use pocketmine\event\plugin\PluginEvent;
 
-class PlayerEntryGameEvent extends PlayerGameEvent implements Cancellable
+class PlayerEntryGameEvent extends PlayerGameManagerEvent implements Cancellable
 {
 }

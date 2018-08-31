@@ -18,13 +18,11 @@ class PlayerGameEvent extends GameEvent
 {
 	/** @var Player */
 	private $player;
-	private $game;
 
 	public function __construct( PluginBase $plugin, Player $player, IGame $game )
 	{
-		parent::__construct( $plugin );
+		parent::__construct( $plugin, $game );
 		$this->player = $player;
-		$this->game = $game;
 	}
 
 	/**
@@ -33,13 +31,5 @@ class PlayerGameEvent extends GameEvent
 	public function getPlayer() : Player
 	{
 		return $this->player;
-	}
-
-	/**
-	 * @return IGame
-	 */
-	public function getGame() : IGame
-	{
-		return $this->game;
 	}
 }

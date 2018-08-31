@@ -13,5 +13,4 @@ use pocketmine\event\plugin\PluginEvent;
 
 class PlayerQuitGameEvent extends PluginEvent
 {
-
 }

@@ -9,7 +9,7 @@
 namespace VectorNetworkProject\GameManager\Event\Game;
 
 
-class StartGameEvent
+class StartGameEvent extends GameEvent
 {
 
 }

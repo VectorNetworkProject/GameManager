@@ -63,6 +63,11 @@ class GameManager extends PluginBase
 	 */
 	public function playerEntry( Player $player, string $game, bool $force ): bool
 	{
+		if( !$player->hasPermission( "vnp.game.entry" ) )
+		{
+			return false;
+		}
+
 		if( isset( $this->games[ $game ] ) )
 		{
 			throw new GameNotRegisteredException( $game );

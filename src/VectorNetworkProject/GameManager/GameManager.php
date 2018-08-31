@@ -63,10 +63,11 @@ class GameManager extends PluginBase
 	 */
 	public function playerEntry( Player $player, string $game, bool $force ): bool
 	{
-		if( ( $game = isset( $this->games[ $game ] ) ) === null )
+		if( isset( $this->games[ $game ] ) )
 		{
-			throw new GameNotRegisteredException( $game->geName() );
+			throw new GameNotRegisteredException( $game );
 		}
+		$game = $this->games[ $game ];
 
 		$entryEvent = new PlayerEntryGameEvent( $this, $player, $game );
 		$this->getServer()->getPluginManager()->callEvent( $entryEvent );

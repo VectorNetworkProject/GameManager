@@ -9,8 +9,6 @@
 namespace VectorNetworkProject\GameManager\Event;
 
 
-use pocketmine\event\plugin\PluginEvent;
-
-class PlayerQuitGameEvent extends PluginEvent
+class PlayerQuitGameEvent extends PlayerGameEvent
 {
 }

@@ -1,2 +1,2 @@
 # GameManager
-An API for Game-Manager.
+An API for Game-Management.

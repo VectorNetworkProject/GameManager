@@ -58,7 +58,7 @@ class GameManager
 			{
 				if( $force )
 				{
-					$event = new PlayerQuitGameEvent();
+					$event = new PlayerQuitGameEvent(  );
 				}
 				else	//エントリーの拒否
 				{

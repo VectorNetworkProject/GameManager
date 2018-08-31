@@ -1,0 +1,9 @@
+name: GameManager
+author: VectorNetworkProject
+version: 0.1.0
+api: 4.0
+main: VectorNetworkProject\GameManager\GameManager
+
+permission:
+  vnp.game.entry:
+    default: true

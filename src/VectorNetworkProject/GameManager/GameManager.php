@@ -9,15 +9,67 @@
 namespace VectorNetworkProject\GameManager;
 
 
+use pocketmine\Player;
+use VectorNetworkProject\GameManager\Event\PlayerQuitGameEvent;
+
 class GameManager
 {
-	
-	public $games;
-	public function registerGame( IGame $game )
+	/** @var IGame[] */
+	private $games;
+
+	/**
+	 * @param IGame $game
+	 *
+	 * @throws GameAlreadyRegisteredException
+	 */
+	public function registerGame( IGame $game ): void
 	{
-		if (isset($this->games[$name]) {
-			throw new GameAlreadyRegisteredException( $name );
+		if( isset( $this->games[ $game->getName() ] ) )
+		{
+			throw new GameAlreadyRegisteredException( $game->getName() );
 		}
-		$this->games[ $name ] = $name;
+		$this->games[ $game->getName() ] = $game;
+	}
+
+	/**
+	 * @param IGame $game
+	 *
+	 * @throws GameNotRegisteredException
+	 */
+	public function unregisterGame( IGame $game ): void
+	{
+		if( !isset( $this->games[ $game->getName() ] ) )
+		{
+			throw new GameNotRegisteredException( $game->getName() );
+		}
+		unset( $this->games[ $game->getName() ] );
+	}
+
+	public function getGames(): array
+	{
+		return $this->games;
+	}
+
+	public function playerEntry( Player $player, string $name, bool $force ): bool
+	{
+		foreach( $this->games as $game )
+		{
+			if( $game->contains( $player ) )
+			{
+				if( $force )
+				{
+					$event = new PlayerQuitGameEvent();
+				}
+				else	//エントリーの拒否
+				{
+					return false;
+				}
+			}
+		}
+	}
+
+	public function playerQuit( Player $player ): void
+	{
+
 	}
 }

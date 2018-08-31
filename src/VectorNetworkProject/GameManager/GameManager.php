@@ -110,7 +110,6 @@ class GameManager extends PluginBase
 				continue;
 			}
 
-			$hasPlayerEntried = true;
 			$QuitEvent = new PlayerQuitGameEvent( $this, $player, $game );
 			$this->getServer()->getPluginManager()->callEvent( $QuitEvent );
 			$game->onPlayerQuit( $player );

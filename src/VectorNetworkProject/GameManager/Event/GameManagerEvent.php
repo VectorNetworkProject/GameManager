@@ -16,16 +16,17 @@ class GameManagerEvent extends PluginEvent
 {
 	/** @var IGame */
 	private $game;
-	public function __construct( Plugin $plugin, IGame $game )
+
+	public function __construct(Plugin $plugin, IGame $game)
 	{
-		parent::__construct( $plugin );
+		parent::__construct($plugin);
 		$this->game = $game;
 	}
 
 	/**
 	 * @return IGame
 	 */
-	public function getGame() : IGame
+	public function getGame(): IGame
 	{
 		return $this->game;
 	}

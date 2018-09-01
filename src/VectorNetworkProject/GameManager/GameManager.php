@@ -37,13 +37,12 @@ class GameManager extends PluginBase
 	 *
 	 * @throws GameAlreadyRegisteredException
 	 */
-	public function registerGame( IGame $game ): void
+	public function registerGame(IGame $game): void
 	{
-		if( isset( $this->games[ $game->getName() ] ) )
-		{
-			throw new GameAlreadyRegisteredException( $game->getName() );
+		if (isset($this->games[$game->getName()])) {
+			throw new GameAlreadyRegisteredException($game->getName());
 		}
-		$this->games[ $game->getName() ] = $game;
+		$this->games[$game->getName()] = $game;
 	}
 
 	/**
@@ -51,13 +50,12 @@ class GameManager extends PluginBase
 	 *
 	 * @throws GameNotRegisteredException
 	 */
-	public function unregisterGame( IGame $game ): void
+	public function unregisterGame(IGame $game): void
 	{
-		if( !isset( $this->games[ $game->getName() ] ) )
-		{
-			throw new GameNotRegisteredException( $game->getName() );
+		if (!isset($this->games[$game->getName()])) {
+			throw new GameNotRegisteredException($game->getName());
 		}
-		unset( $this->games[ $game->getName() ] );
+		unset($this->games[$game->getName()]);
 	}
 
 	public function getGames(): array
@@ -68,68 +66,58 @@ class GameManager extends PluginBase
 	/**
 	 * @param Player $player
 	 * @param string $game
-	 * @param bool   $force
+	 * @param bool $force
 	 *
 	 * @return bool
 	 * @throws GameNotRegisteredException
 	 */
-	public function playerEntry( Player $player, string $game, bool $force ): bool
+	public function playerEntry(Player $player, string $game, bool $force): bool
 	{
-		if( !$player->hasPermission( "vnp.game.entry" ) )
-		{
+		if (!$player->hasPermission("vnp.game.entry")) {
 			return false;
 		}
 
-		if( isset( $this->games[ $game ] ) )
-		{
-			throw new GameNotRegisteredException( $game );
+		if (isset($this->games[$game])) {
+			throw new GameNotRegisteredException($game);
 		}
-		$game = $this->games[ $game ];
+		$game = $this->games[$game];
 
-		$entryEvent = new PlayerEntryGameEvent( $this, $player, $game );
-		$this->getServer()->getPluginManager()->callEvent( $entryEvent );
+		$entryEvent = new PlayerEntryGameEvent($this, $player, $game);
+		$this->getServer()->getPluginManager()->callEvent($entryEvent);
 
-		if( $entryEvent->isCancelled() )
-		{
+		if ($entryEvent->isCancelled()) {
 			return false;
 		}
 
-		foreach( $this->games as $game )
-		{
-			if( $game->contains( $player ) )
-			{
+		foreach ($this->games as $game) {
+			if ($game->contains($player)) {
 				continue;
 			}
-			if( $force )
-			{
-				$QuitEvent = new PlayerQuitGameEvent( $this, $player, $game );
-				$this->getServer()->getPluginManager()->callEvent( $QuitEvent );
-				$game->onPlayerQuit( $player );
+			if ($force) {
+				$QuitEvent = new PlayerQuitGameEvent($this, $player, $game);
+				$this->getServer()->getPluginManager()->callEvent($QuitEvent);
+				$game->onPlayerQuit($player);
 				break;
-			}
-			else	//エントリーの拒否
-			{
-				return false;
+			} else {
+				return false; //エントリーのキャンセル
 			}
 		}
 
-		$game->onPlayerEntry( $player );
+		$game->onPlayerEntry($player);
 
 		return true;
 	}
 
-	public function playerQuit( Player $player ): bool
+	public function playerQuit(Player $player): bool
 	{
-		foreach( $this->games as $game )
-		{
-			if( $game->contains( $player ) )
-			{
+		foreach ($this->games as $game) {
+			if ($game->contains($player)) {
 				continue;
 			}
 
-			$QuitEvent = new PlayerQuitGameEvent( $this, $player, $game );
-			$this->getServer()->getPluginManager()->callEvent( $QuitEvent );
-			$game->onPlayerQuit( $player );
+			$QuitEvent = new PlayerQuitGameEvent($this, $player, $game);
+			$this->getServer()->getPluginManager()->callEvent($QuitEvent);
+			$game->onPlayerQuit($player);
 			return true;
 		}
 

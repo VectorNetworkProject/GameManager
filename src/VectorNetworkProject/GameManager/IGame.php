@@ -14,9 +14,14 @@ use pocketmine\Player;
 interface IGame
 {
 	public function getName(): string;
-	public function onDisable(): bool;
-	public function onPlayerEntry( Player $player ): bool;
-	public function onPlayerQuit( Player $player ): void;
+
+	public function close(): bool;
+
+	public function onPlayerEntry(Player $player): bool;
+
+	public function onPlayerQuit(Player $player): void;
+
 	public function getPlayers();
-	public function contains( Player $player ): bool;
+
+	public function contains(Player $player): bool;
 }

@@ -1,2 +1,18 @@
 {
+  "name": "vnp/game-manager",
+  "description": "GameManager",
+  "type": "library",
+  "license": "MIT",
+  "homepage": "https://vnp.inkohx.xyz",
+  "authors": [
+    {
+      "name": "UramnOIL",
+      "email": "uramnoil@outlook.jp"
+    }
+  ],
+  "autoload": {
+    "psr-0": {
+      "VectorNetworkProject\\GameManager": "src/"
+    }
+  }
 }

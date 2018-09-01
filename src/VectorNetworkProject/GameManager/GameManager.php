@@ -11,6 +11,7 @@ namespace VectorNetworkProject\GameManager;
 
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\Utils;
 use VectorNetworkProject\GameManager\Command\GameListCommand;
 use VectorNetworkProject\GameManager\Event\PlayerEntryGameEvent;
 use VectorNetworkProject\GameManager\Event\PlayerQuitGameEvent;
@@ -33,12 +34,15 @@ class GameManager extends PluginBase
 	}
 
 	/**
-	 * @param IGame $game
+	 * @param string $game
 	 *
 	 * @throws GameAlreadyRegisteredException
 	 */
-	public function registerGame(IGame $game): void
+	public function registerGame(string $game): void
 	{
+		Utils::testValidInstance($game, IGame::class);
+		/** @var IGame $game */
+		$game = new $game();
 		if (isset($this->games[$game->getName()])) {
 			throw new GameAlreadyRegisteredException($game->getName());
 		}

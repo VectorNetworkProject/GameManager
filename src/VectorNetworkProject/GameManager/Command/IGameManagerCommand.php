@@ -8,9 +8,6 @@
 
 namespace VectorNetworkProject\GameManager\Command;
 
-
-use pocketmine\command\Command;
-
 interface IGameManagerCommand
 {
 }

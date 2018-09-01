@@ -11,6 +11,7 @@ namespace VectorNetworkProject\GameManager;
 
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
+use VectorNetworkProject\GameManager\Command\GameListCommand;
 use VectorNetworkProject\GameManager\Event\PlayerEntryGameEvent;
 use VectorNetworkProject\GameManager\Event\PlayerQuitGameEvent;
 
@@ -19,6 +20,17 @@ class GameManager extends PluginBase
 
 	/** @var IGame[] */
 	private $games;
+
+	protected function onEnable()
+	{
+		foreach(
+		[
+			new GameListCommand( $this )
+		] as $command )
+		{
+			$this->getServer()->getCommandMap()->register( 'gamemanager', $command );
+		}
+	}
 
 	/**
 	 * @param IGame $game

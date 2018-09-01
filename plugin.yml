@@ -5,5 +5,7 @@ api: 4.0
 main: VectorNetworkProject\GameManager\GameManager
 
 permission:
+  vpn.command.getlist:
+    default: true
   vnp.game.entry:
     default: true
